@@ -1,13 +1,17 @@
-version: '3.9'
 name: faculty-hours-broker
 services:
   rabbitmq:
-    image: rabbitmq:3-management
+    build: 
+      context: ..
+      dockerfile: ./.docker/Dockerfile
     ports:
       - "5672:5672"
       - "15672:15672"
     networks:
       - faculty_network
-    environment:
-      RABBITMQ_DEFAULT_USER: user
-      RABBITMQ_DEFAULT_PASS: password
+    env_file:
+      - .env
+
+networks:
+  faculty_network:
+    driver: bridge
