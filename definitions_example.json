@@ -1,111 +1,97 @@
 {
-    "rabbit_version": "3.13.4",
-    "rabbitmq_version": "3.13.4",
-    "product_name": "RabbitMQ",
-    "product_version": "3.13.4",
+  "rabbit_version": "3.13.4",
+  "rabbitmq_version": "3.13.4",
+  "product_name": "RabbitMQ",
+  "product_version": "3.13.4",
 "users": [
-      {
-        "name": "set_name",
-        "password": "set_password_it_can_be_hashed",
-        "password_hash": "set_hashed_password",
-        "hashing_algorithm": "rabbit_password_hashing_sha256", 
-        "tags": "administrator"
+    {
+      "name": "set-user-name",
+      "password": "set-password-or-hash-password",
+      "tags": "administrator"
+    }
+  ],
+  "vhosts": [
+    {
+      "name": "faculty-vhost"
+    }
+  ],
+  "permissions": [
+    {
+      "user": "adam",
+      "vhost": "faculty-vhost",
+      "configure": ".*",
+      "write": ".*",
+      "read": ".*"
+    }
+  ],
+  "topic_permissions": [
+
+  ],
+  "parameters": [
+
+  ],
+  "global_parameters": [
+    {
+      "name": "cluster_name",
+      "value": "rabbit@a8d5c6e08439"
+    },
+    {
+      "name": "internal_cluster_id",
+      "value": "rabbitmq-cluster-id-gXeBLbsUC2W2tU0Bx_QY_w"
+    }
+  ],
+  "policies": [
+
+  ],
+  "queues": [
+    {
+      "name": "teacher-report-queue",
+      "vhost": "faculty-vhost",
+      "durable": true,
+      "auto_delete": false
+    },
+    {
+      "name": "personal-report-queue",
+      "vhost": "faculty-vhost",
+      "durable": true,
+      "auto_delete": false
+    },
+    {
+      "name": "summary-report-queue",
+      "vhost": "faculty-vhost",
+      "durable": true,
+      "auto_delete": false
+    }
+  ],
+  "exchanges": [
+  ],
+  "bindings": [
+    {
+      "source": "amq.direct",
+      "vhost": "faculty-vhost",
+      "destination": "teacher-report-queue",
+      "destination_type": "queue",
+      "routing_key": "teacher-report-queue",
+      "arguments": {
       }
-    ],
-    "vhosts": [
-      {
-        "name": "faculty-vhost"
+    },
+    {
+      "source": "amq.direct",
+      "vhost": "faculty-vhost",
+      "destination": "personal-report-queue",
+      "destination_type": "queue",
+      "routing_key": "personal-report-queue",
+      "arguments": {
       }
-    ],
-    "permissions": [
-      {
-        "user": "adam",
-        "vhost": "faculty-vhost",
-        "configure": ".*",
-        "write": ".*",
-        "read": ".*"
+    },
+    {
+      "source": "amq.direct",
+      "vhost": "faculty-vhost",
+      "destination": "summary-report-queue",
+      "destination_type": "queue",
+      "routing_key": "summary-report-queue",
+      "arguments": {
       }
-    ],
-    "topic_permissions": [
-  
-    ],
-    "parameters": [
-  
-    ],
-    "global_parameters": [
-      {
-        "name": "cluster_name",
-        "value": "rabbit@a8d5c6e08439"
-      },
-      {
-        "name": "internal_cluster_id",
-        "value": "rabbitmq-cluster-id-gXeBLbsUC2W2tU0Bx_QY_w"
-      }
-    ],
-    "policies": [
-  
-    ],
-    "queues": [
-      {
-        "name": "teacher-report-queue",
-        "vhost": "faculty-vhost",
-        "durable": true,
-        "auto_delete": false,
-        "arguments": {
-          "x-queue-mode": "lazy",
-          "x-queue-type": "classic"
-        }
-      },
-      {
-        "name": "personal-report-queue",
-        "vhost": "faculty-vhost",
-        "durable": true,
-        "auto_delete": false,
-        "arguments": {
-          "x-queue-mode": "lazy",
-          "x-queue-type": "classic"
-        }
-      },
-      {
-        "name": "summary-report-queue",
-        "vhost": "faculty-vhost",
-        "durable": true,
-        "auto_delete": false,
-        "arguments": {
-          "x-queue-mode": "lazy",
-          "x-queue-type": "classic"
-        }
-      }
-    ],
-    "exchanges": [
-    ],
-    "bindings": [
-      {
-        "source": "amq.direct",
-        "vhost": "faculty-vhost",
-        "destination": "teacher-report-queue",
-        "destination_type": "queue",
-        "routing_key": "teacher-report-queue",
-        "arguments": {
-        }
-      },
-      {
-        "source": "amq.direct",
-        "vhost": "faculty-vhost",
-        "destination": "personal-report-queue",
-        "destination_type": "queue",
-        "routing_key": "personal-report-queue",
-        "arguments": {
-        }
-      },
-      {
-        "source": "amq.direct",
-        "vhost": "faculty-vhost",
-        "destination": "summary-report-queue",
-        "destination_type": "queue",
-        "routing_key": "summary-report-queue",
-        "arguments": {
-        }
-      }
-    ]
-  }
+    }
+  ]
+}
